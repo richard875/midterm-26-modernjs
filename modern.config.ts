@@ -7,6 +7,7 @@ export default defineConfig({
   html: {
     title: 'Midterm / 26 — The balance of power',
     meta: {
+      viewport: 'width=device-width, initial-scale=1',
       description:
         'A small, open election desk. Follow 2026 US midterm polls and prediction markets.',
       'theme-color': '#f6f5f0',

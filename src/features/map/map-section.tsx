@@ -1,4 +1,4 @@
-import { lazy, Suspense, useState } from 'react';
+import { lazy, Suspense } from 'react';
 import type { RaceData } from '../../../shared/contracts';
 import { RACES } from '../../../shared/races';
 import { ArrowIcon } from '../../components/icons';
@@ -14,13 +14,18 @@ export default function MapSection({
   onSelect,
   races,
   loading,
+  office,
+  setOffice,
+  onExploreRace,
 }: {
   selected: string;
   onSelect: (code: string) => void;
   races: RaceData[];
   loading: boolean;
+  office: 'All races' | 'Senate' | 'Governor';
+  setOffice: (office: 'All races' | 'Senate' | 'Governor') => void;
+  onExploreRace: (id: string) => void;
 }) {
-  const [office, setOffice] = useState<'All races' | 'Senate' | 'Governor'>('All races');
   const tracked = RACES.filter((race) => office === 'All races' || race.office === office);
   const chosen = tracked.find((race) => race.state === selected);
   const data = races.find((race) => race.id === chosen?.id);
@@ -96,7 +101,7 @@ export default function MapSection({
         {chosen ? (
           <>
             <p className="state-office">
-              US {chosen.office === 'Senate' ? 'Senate' : 'Governor'} race <span>↗</span>
+              {chosen.office === 'Senate' ? 'US Senate' : 'Governor'} race <span>↗</span>
             </p>
             {data ? (
               <>
@@ -110,7 +115,14 @@ export default function MapSection({
                   : 'Race data could not be loaded. Use Refresh data to retry.'}
               </div>
             )}
-            <a className="text-link" href={`#${chosen.id}`}>
+            <a
+              className="text-link"
+              href={`#${chosen.id}`}
+              onClick={(event) => {
+                event.preventDefault();
+                onExploreRace(chosen.id);
+              }}
+            >
               Explore this race
               <ArrowIcon />
             </a>

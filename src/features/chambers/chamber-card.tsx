@@ -9,10 +9,14 @@ export default function ChamberCard({
   chamber,
   overview,
   races,
+  loading,
+  onExploreRace,
 }: {
   chamber: 'house' | 'senate';
   overview: Overview | null;
   races: RaceData[];
+  loading: boolean;
+  onExploreRace: (id: string) => void;
 }) {
   const house = chamber === 'house';
   return (
@@ -32,7 +36,11 @@ export default function ChamberCard({
       {overview ? (
         <MarketPrices markets={overview[chamber]} />
       ) : (
-        <div className="card-placeholder">Loading chamber markets…</div>
+        <div className="card-placeholder">
+          {loading
+            ? 'Loading chamber markets…'
+            : 'Chamber data is unavailable. Use Refresh data to retry.'}
+        </div>
       )}
       {house ? (
         <div className="chamber-poll">
@@ -40,7 +48,9 @@ export default function ChamberCard({
           {overview ? (
             <PollDisplay feed={overview.genericBallot} compact />
           ) : (
-            <p className="muted">Loading the generic ballot…</p>
+            <p className="muted">
+              {loading ? 'Loading the generic ballot…' : 'Generic ballot unavailable.'}
+            </p>
           )}
           <p className="source-note">
             Generic ballot via VoteHub. Vote share is not a forecast of seats or control.
@@ -58,7 +68,14 @@ export default function ChamberCard({
               const poll = data?.polls.status === 'ok' ? data.polls.data[0] : undefined;
               const margin = poll ? pollMargin(poll) : null;
               return (
-                <a key={race.id} href={`#${race.id}`}>
+                <a
+                  key={race.id}
+                  href={`#${race.id}`}
+                  onClick={(event) => {
+                    event.preventDefault();
+                    onExploreRace(race.id);
+                  }}
+                >
                   <span>{race.stateName}</span>
                   <span className="muted">
                     {poll ? dateLabel(poll.endDate) : 'No poll available'}

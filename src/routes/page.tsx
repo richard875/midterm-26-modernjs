@@ -12,6 +12,7 @@ export default function Page() {
   const overview = useResource('/api/overview', overviewSchema);
   const raceResource = useResource('/api/races', racesResponseSchema);
   const [selected, setSelected] = useState('TX');
+  const [mapOffice, setMapOffice] = useState<'All races' | 'Senate' | 'Governor'>('All races');
   const [filter, setFilter] = useState<'All races' | 'Senate' | 'Governor'>('All races');
   const races = raceResource.data?.races ?? [];
   const loading = overview.loading || raceResource.loading;
@@ -32,7 +33,25 @@ export default function Page() {
   ].some((feed) => feed && feed.status !== 'ok');
   function selectFromCard(state: string) {
     setSelected(state);
-    document.getElementById('explore')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    setMapOffice('All races');
+    const mapElement = document.getElementById('explore');
+    mapElement?.scrollIntoView({
+      behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches
+        ? 'instant'
+        : 'smooth',
+      block: 'start',
+    });
+  }
+  function exploreRace(id: string) {
+    setFilter('All races');
+    requestAnimationFrame(() => {
+      document.getElementById(id)?.scrollIntoView({
+        behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches
+          ? 'instant'
+          : 'smooth',
+        block: 'start',
+      });
+    });
   }
   return (
     <>
@@ -118,7 +137,7 @@ export default function Page() {
           <div>
             <span className="last-updated">
               {fetchedAt
-                ? `Retrieved ${new Date(fetchedAt).toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' })} · your local time`
+                ? `Retrieved ${new Date(fetchedAt).toLocaleString('en-US', { month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit' })} · your local time`
                 : 'Live sources, no simulated data'}
             </span>
             <button
@@ -146,6 +165,9 @@ export default function Page() {
           onSelect={setSelected}
           races={races}
           loading={raceResource.loading}
+          office={mapOffice}
+          setOffice={setMapOffice}
+          onExploreRace={exploreRace}
         />
         <section className="congress-section" id="congress" aria-labelledby="congress-heading">
           <div className="section-heading">
@@ -156,8 +178,20 @@ export default function Page() {
             <p>Two chambers. Two paths to a majority.</p>
           </div>
           <div className="chamber-grid">
-            <ChamberCard chamber="house" overview={overview.data} races={races} />
-            <ChamberCard chamber="senate" overview={overview.data} races={races} />
+            <ChamberCard
+              chamber="house"
+              overview={overview.data}
+              races={races}
+              loading={overview.loading}
+              onExploreRace={exploreRace}
+            />
+            <ChamberCard
+              chamber="senate"
+              overview={overview.data}
+              races={races}
+              loading={overview.loading}
+              onExploreRace={exploreRace}
+            />
           </div>
         </section>
         <section className="watchlist-section" id="watchlist" aria-labelledby="watchlist-heading">
@@ -192,6 +226,7 @@ export default function Page() {
                   key={race.id}
                   race={race}
                   data={races.find((entry) => entry.id === race.id)}
+                  loading={raceResource.loading}
                   onSelect={() => selectFromCard(race.state)}
                 />
               ),

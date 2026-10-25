@@ -8,10 +8,12 @@ export default function RaceCard({
   race,
   data,
   onSelect,
+  loading,
 }: {
   race: RaceConfig;
   data?: RaceData;
   onSelect: () => void;
+  loading: boolean;
 }) {
   return (
     <article className="race-card" id={race.id}>
@@ -59,14 +61,16 @@ export default function RaceCard({
               <p className="source-note">
                 Market quotes observed{' '}
                 {new Date(data.markets.polymarket.retrievedAt).toLocaleString('en-US')} (your local
-                time). Check each market for its rules. Polls below are individual surveys.
+                time). Check each market for its rules. These are individual surveys.
               </p>
             </div>
           </details>
         </>
       ) : (
         <div className="card-placeholder" role="status">
-          Waiting for race data…
+          {loading
+            ? 'Waiting for race data…'
+            : 'Race data is unavailable. Use Refresh data to retry.'}
         </div>
       )}
     </article>
