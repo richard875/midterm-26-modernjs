@@ -28,7 +28,7 @@ export function RefreshIcon() {
     </svg>
   );
 }
-export function CapitolIcon() {
+export function HouseIcon() {
   return (
     <svg
       width="28"
@@ -36,10 +36,32 @@ export function CapitolIcon() {
       viewBox="0 0 32 32"
       fill="none"
       stroke="currentColor"
-      strokeWidth="1.2"
+      strokeWidth="1.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
       aria-hidden="true"
     >
-      <path d="M3 28h26M5 24h22M7 24V14h18v10M5 14h22M9 14a7 7 0 0 1 14 0M16 7V3m0 0h5v3h-5M11 17v7m5-7v7m5-7v7" />
+      <path d="M3 28h26M5 25h22M7 25V13h18v12M4 13 16 5l12 8H4Z" />
+      <path d="M11 17v8m5-8v8m5-8v8" />
+    </svg>
+  );
+}
+
+export function SenateIcon() {
+  return (
+    <svg
+      width="28"
+      height="28"
+      viewBox="0 0 32 32"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+    >
+      <path d="m9 6 4-4 11 11-4 4L9 6Zm-2 2 4-4m9 11 4-4M14 12 4 22a2 2 0 0 0 3 3l10-10" />
+      <path d="M16 25h10l2 4H14l2-4Z" />
     </svg>
   );
 }

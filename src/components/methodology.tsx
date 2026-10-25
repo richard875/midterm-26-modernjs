@@ -1,6 +1,55 @@
+import { type ReactNode, useState } from 'react';
 import { RACES } from '../../shared/races';
 
+type SectionId = 'polls' | 'markets' | 'watchlist' | 'sources';
+
+function AccordionSection({
+  id,
+  title,
+  open,
+  onToggle,
+  children,
+}: {
+  id: SectionId;
+  title: string;
+  open: boolean;
+  onToggle: () => void;
+  children: ReactNode;
+}) {
+  const triggerId = `methodology-${id}-trigger`;
+  const panelId = `methodology-${id}-panel`;
+  return (
+    <div className="methodology-item">
+      <h3 className="methodology-question">
+        <button
+          id={triggerId}
+          type="button"
+          aria-expanded={open}
+          aria-controls={panelId}
+          onClick={onToggle}
+        >
+          {title}
+          <span aria-hidden="true">+</span>
+        </button>
+      </h3>
+      <section
+        id={panelId}
+        className="methodology-panel"
+        aria-labelledby={triggerId}
+        aria-hidden={!open}
+        inert={!open}
+        data-open={open}
+      >
+        <div className="methodology-content">{children}</div>
+      </section>
+    </div>
+  );
+}
+
 export default function Methodology() {
+  const [openSection, setOpenSection] = useState<SectionId | null>('polls');
+  const toggleSection = (id: SectionId) =>
+    setOpenSection((current) => (current === id ? null : id));
   const senateRaces = RACES.filter((race) => race.office === 'Senate');
   const governorRaces = RACES.filter((race) => race.office === 'Governor');
   return (
@@ -15,10 +64,12 @@ export default function Methodology() {
         <p>Keep the public’s vote intentions and the market’s expectations in context.</p>
       </div>
       <div className="methodology-details">
-        <details name="methodology" open>
-          <summary>
-            What do the polls measure?<span>+</span>
-          </summary>
+        <AccordionSection
+          id="polls"
+          title="What do the polls measure?"
+          open={openSection === 'polls'}
+          onToggle={() => toggleSection('polls')}
+        >
           <p>
             Individual surveys report vote share, including undecided and other voters. We show the
             latest valid general-election poll for the listed matchup, not a weighted average.
@@ -44,11 +95,13 @@ export default function Methodology() {
             . Original poll links and each row’s licence appear on the cards. LV = likely voters; RV
             = registered voters; A = adults. Polls older than 14 days are flagged.
           </p>
-        </details>
-        <details name="methodology">
-          <summary>
-            What do the markets measure?<span>+</span>
-          </summary>
+        </AccordionSection>
+        <AccordionSection
+          id="markets"
+          title="What do the markets measure?"
+          open={openSection === 'markets'}
+          onToggle={() => toggleSection('markets')}
+        >
           <p>
             Prices are market-implied probabilities for each platform’s resolution rules. Polymarket
             uses the API’s Yes outcome price. Kalshi uses the midpoint of its current Yes bid and
@@ -60,11 +113,13 @@ export default function Methodology() {
             timestamp. Kalshi’s metadata update is not a trade timestamp. Closed markets, empty
             books and unavailable sources show no quote. No market price is a polling average.
           </p>
-        </details>
-        <details name="methodology">
-          <summary>
-            How is the watchlist selected?<span>+</span>
-          </summary>
+        </AccordionSection>
+        <AccordionSection
+          id="watchlist"
+          title="How is the watchlist selected?"
+          open={openSection === 'watchlist'}
+          onToggle={() => toggleSection('watchlist')}
+        >
           <p>
             This Modern.js demo follows {RACES.length} curated races: {senateRaces.length} Senate
             races ({senateRaces.map((race) => race.state).join(', ')}) and {governorRaces.length}{' '}
@@ -77,11 +132,13 @@ export default function Methodology() {
             polling. Failures are isolated by source, and we never substitute simulated numbers.
             These are pre-election polls and markets, not election returns.
           </p>
-        </details>
-        <details name="methodology">
-          <summary>
-            Free APIs & source documentation<span>+</span>
-          </summary>
+        </AccordionSection>
+        <AccordionSection
+          id="sources"
+          title="Free APIs & source documentation"
+          open={openSection === 'sources'}
+          onToggle={() => toggleSection('sources')}
+        >
           <p>
             <a href="https://votehub.com/polls/api/" target="_blank" rel="noreferrer">
               VoteHub polling API ↗
@@ -114,7 +171,7 @@ export default function Methodology() {
             </a>
             , derived from US Census boundaries. Alaska and Hawaii are inset.
           </p>
-        </details>
+        </AccordionSection>
       </div>
     </section>
   );

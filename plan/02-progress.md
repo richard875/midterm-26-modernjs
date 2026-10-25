@@ -73,3 +73,10 @@ Final handoff check: a fresh `npm run dev` serves HTML 200 and the native API su
 - Grouped only the four methodology disclosures using native `details` names. Verified each section, Enter-key use, automatic collapse of the previous section, and closing the active section.
 - All nine existing tests, typecheck, lint and final Pages build pass. Inspected desktop plus 390px/320px iframe layouts. No dependency, provider or backend contract changes.
 - The pre-existing dev server's backend still served the earlier six-race bundle during verification; the fresh production Pages runtime serves nine. Informed the user to restart the dev command once, without stopping their process.
+
+## Follow-up — map focus, chamber presentation and animation (26 October)
+
+- Removed the map's rectangular focus outline while retaining a keyboard-only state-boundary highlight.
+- Added separate House building and Senate gavel icons; renamed the chamber headings to “House of Representatives” and “Senate”, and removed the “US” prefix in the selected-state Senate label.
+- Replaced the methodology's instant native disclosure with an exclusive React-controlled accordion and 240ms CSS grid/opacity transitions. Buttons retain keyboard behavior, ARIA relationships and focus exclusion for closed panels. Reduced-motion preferences disable the transitions.
+- As requested, kept checks brief: formatting, TypeScript and lint only, with no polling investigation or extended browser run.

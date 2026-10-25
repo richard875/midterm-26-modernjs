@@ -101,7 +101,7 @@ export default function MapSection({
         {chosen ? (
           <>
             <p className="state-office">
-              {chosen.office === 'Senate' ? 'US Senate' : 'Governor'} race <span>↗</span>
+              {chosen.office} race <span>↗</span>
             </p>
             {data ? (
               <>

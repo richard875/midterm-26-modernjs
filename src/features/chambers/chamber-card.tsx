@@ -1,6 +1,6 @@
 import type { Overview, RaceData } from '../../../shared/contracts';
 import { RACES } from '../../../shared/races';
-import { CapitolIcon } from '../../components/icons';
+import { HouseIcon, SenateIcon } from '../../components/icons';
 import { MarketPrices } from '../../components/market-prices';
 import { PollDisplay } from '../../components/poll-display';
 import { dateLabel, pollMargin } from '../../lib/format';
@@ -24,11 +24,9 @@ export default function ChamberCard({
       <div className="chamber-heading">
         <div>
           <span className="eyebrow">Control of Congress</span>
-          <h3>US {house ? 'House' : 'Senate'}</h3>
+          <h3>{house ? 'House of Representatives' : 'Senate'}</h3>
         </div>
-        <span className="capitol">
-          <CapitolIcon />
-        </span>
+        <span className="chamber-icon">{house ? <HouseIcon /> : <SenateIcon />}</span>
       </div>
       <p className="chamber-context">
         {house ? '435 seats · 218 for a majority' : '100 seats · 35 on the ballot in 2026'}

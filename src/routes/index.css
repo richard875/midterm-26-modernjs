@@ -355,15 +355,18 @@ main,
   fill: #b0bda6;
 }
 .map-state:focus {
+  outline: none;
+}
+.map-state:focus-visible {
   fill: #b4c4a9;
   stroke: #263f32;
   stroke-width: 2.6;
 }
 .map-state.tracked:hover,
-.map-state.tracked:focus {
+.map-state.tracked:focus-visible {
   fill: var(--map-tracked);
 }
-.map-state.selected:focus {
+.map-state.selected:focus-visible {
   fill: var(--peach);
 }
 .map-state.selected:hover {
@@ -553,15 +556,21 @@ main,
   padding: 27px 28px 24px;
 }
 .chamber-heading {
+  gap: 16px;
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
 .chamber-heading h3 {
+  overflow-wrap: anywhere;
   font-size: 29px;
   margin-top: 7px;
 }
-.capitol {
+.chamber-heading > div {
+  min-width: 0;
+}
+.chamber-icon {
+  flex-shrink: 0;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -953,39 +962,61 @@ main,
   color: var(--muted);
   max-width: 275px;
 }
-.methodology-details > details {
+.methodology-item {
   border-bottom: 1px solid var(--line);
 }
-.methodology-details summary {
-  gap: 16px;
-  line-height: 1.5;
+.methodology-question {
+  font: inherit;
+  letter-spacing: normal;
+}
+.methodology-question button {
   display: flex;
+  align-items: center;
   justify-content: space-between;
-  list-style: none;
+  gap: 16px;
+  width: 100%;
+  border: 0;
+  padding: 17px 0;
+  background: none;
+  color: inherit;
+  text-align: left;
   font-size: var(--text-body);
   font-weight: 500;
-  cursor: pointer;
-  padding: 17px 0;
+  line-height: 1.5;
 }
-.methodology-details summary::-webkit-details-marker {
-  display: none;
-}
-.methodology-details summary > span {
+.methodology-question button > span {
   flex-shrink: 0;
   font-size: 18px;
   color: var(--muted);
+  transition: transform 240ms ease;
 }
-.methodology-details details[open] summary > span {
+.methodology-question button[aria-expanded="true"] > span {
   transform: rotate(45deg);
 }
-.methodology-details details p {
+.methodology-panel {
+  display: grid;
+  grid-template-rows: 0fr;
+  opacity: 0;
+  transition:
+    grid-template-rows 240ms ease,
+    opacity 180ms ease;
+}
+.methodology-panel[data-open="true"] {
+  grid-template-rows: 1fr;
+  opacity: 1;
+}
+.methodology-content {
+  min-height: 0;
+  overflow: hidden;
+}
+.methodology-content p {
   font-size: var(--text-body);
   line-height: 1.9;
   color: var(--muted);
   padding-bottom: 15px;
   max-width: 590px;
 }
-.methodology-details details a {
+.methodology-content a {
   text-underline-offset: 3px;
 }
 .site-footer {
@@ -1623,7 +1654,7 @@ main,
     max-width: 100%;
     font-size: var(--text-body);
   }
-  .methodology-details summary {
+  .methodology-question button {
     font-size: var(--text-body);
   }
   .site-footer {
