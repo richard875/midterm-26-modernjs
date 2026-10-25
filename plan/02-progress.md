@@ -64,3 +64,12 @@ Final handoff check: a fresh `npm run dev` serves HTML 200 and the native API su
 - Replaced fixed watchlist count/methodology copy with configuration-derived totals and office lists. Coverage is now nine races: five Senate and four governor.
 - Updated the current README and data-source documentation. Historical initial verification records remain unchanged.
 - Strict TypeScript, lint, all nine tests and Pages build pass. Live workerd checks return polling plus both exchange feeds for all three additions. Browser checks cover map selection, Senate/Governor separation and five/four filter results. Verification screenshot: `docs/screenshots/watchlist-expansion.png`.
+
+## Follow-up — readability and methodology accordion
+
+- Recorded the request and implementation sequence in `04-readability-and-accordion.md` before edits.
+- Raised the page's small-text floor from 7–13px to 14px, with 16px explanatory text and candidate/price values. Added shared type tokens and reflowed dense layouts instead of reducing fonts at mobile breakpoints.
+- Changed map state labels to fixed-size HTML overlays so they remain readable when the geographic SVG scales down. Kept source labels, map legend and metadata readable, with wrapping for narrow columns.
+- Grouped only the four methodology disclosures using native `details` names. Verified each section, Enter-key use, automatic collapse of the previous section, and closing the active section.
+- All nine existing tests, typecheck, lint and final Pages build pass. Inspected desktop plus 390px/320px iframe layouts. No dependency, provider or backend contract changes.
+- The pre-existing dev server's backend still served the earlier six-race bundle during verification; the fresh production Pages runtime serves nine. Informed the user to restart the dev command once, without stopping their process.

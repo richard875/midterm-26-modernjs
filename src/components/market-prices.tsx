@@ -37,7 +37,7 @@ export function MarketPrices({ markets }: { markets: MarketPair }) {
   return (
     <div className="market-table">
       <div className="market-heading">
-        <span>Market / win probability</span>
+        <span>Win probability</span>
         <span className="dem">DEM</span>
         <span className="rep">GOP</span>
         <span />

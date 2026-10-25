@@ -45,3 +45,13 @@ Added Kansas Senate, Iowa Senate and Ohio Governor, for nine races (five Senate 
 - Current counts and methodology state lists derive from the race configuration.
 
 [Expanded watchlist screenshot](screenshots/watchlist-expansion.png) shows the three additions with live data.
+
+## Readability and exclusive accordion — 25 October 2026
+
+- Existing typecheck, lint and nine tests pass; the final Pages production build passes.
+- Browser computed styles at 942px report a 14px minimum across rendered text and 16px methodology paragraphs. The page width matches the viewport. Labels and metadata use shared type tokens; no narrow-screen rules reduce them below the minimum.
+- Visually checked larger text, wrapped metadata, card headings, state labels and footer prose in 390px and 320px iframe viewports. These are layout checks rather than device emulation.
+- The methodology starts with the polling section open. Opening markets, watchlist or source details closes the previously open section. Clicking the active section closes it; Enter-key activation also works. Only methodology disclosures are grouped; recent-poll disclosures remain independent.
+- Fresh workerd APIs still return nine races. A pre-existing Modern.js development process retained an older six-race backend bundle; its owner should restart the dev command to refresh that local cache.
+
+[Desktop readability screenshot](screenshots/readability-desktop.png) · [390px and 320px typography screenshot](screenshots/readability-mobile.png).

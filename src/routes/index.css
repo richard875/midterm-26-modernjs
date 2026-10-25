@@ -7,13 +7,17 @@
   font-synthesis: none;
   -webkit-font-smoothing: antialiased;
   --ink: #253531;
-  --muted: #6b756e;
+  --muted: #5b665f;
   --line: #dcdfd7;
   --green: #315748;
   --dem: #356da8;
   --rep: #bc5d50;
   --paper: #fdfdf9;
   --peach: #e9c4a0;
+  --text-small: 0.875rem;
+  --text-body: 1rem;
+  --market-columns: minmax(0, 1fr) 3rem 3rem 1rem;
+  --map-tracked: #54785d;
 }
 * {
   box-sizing: border-box;
@@ -24,6 +28,8 @@ html {
 }
 body {
   margin: 0;
+  font-size: var(--text-body);
+  line-height: 1.5;
 }
 button,
 select {
@@ -133,7 +139,7 @@ main,
 .site-header nav {
   display: flex;
   gap: 32px;
-  font-size: 13px;
+  font-size: var(--text-small);
 }
 .site-header nav a {
   text-decoration: none;
@@ -149,7 +155,7 @@ main,
   display: flex;
   align-items: center;
   gap: 8px;
-  font-size: 12px;
+  font-size: var(--text-small);
   color: var(--muted);
 }
 .status-dot {
@@ -176,9 +182,9 @@ main,
   gap: 17px;
 }
 .eyebrow {
-  font-size: 10px;
+  font-size: var(--text-small);
   font-weight: 650;
-  letter-spacing: 1.55px;
+  letter-spacing: 0.07em;
   text-transform: uppercase;
   color: var(--muted);
 }
@@ -187,7 +193,7 @@ main,
   border: 1px solid #d7dfd2;
   border-radius: 3px;
   color: #547045;
-  font-size: 10px;
+  font-size: var(--text-small);
   font-weight: 500;
 }
 .hero h1 {
@@ -205,7 +211,7 @@ main,
 }
 .hero p {
   color: var(--muted);
-  font-size: 15px;
+  font-size: var(--text-body);
   line-height: 1.8;
 }
 .election-date {
@@ -227,12 +233,12 @@ main,
 .election-date > div span {
   font-family: "DM Sans", sans-serif;
   font-size: 17px;
-  letter-spacing: 1px;
+  letter-spacing: 0.05em;
   font-weight: 450;
   line-height: 1.6;
 }
 .election-date p {
-  font-size: 12px;
+  font-size: var(--text-small);
 }
 .election-date p span {
   color: #bdc2b8;
@@ -240,10 +246,11 @@ main,
 }
 .desk-status {
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
   margin-bottom: 16px;
-  font-size: 11px;
+  font-size: var(--text-small);
   color: var(--muted);
   gap: 15px;
 }
@@ -254,6 +261,7 @@ main,
   gap: 9px;
 }
 .desk-status > div {
+  flex-wrap: wrap;
   gap: 20px;
 }
 .refresh-button {
@@ -262,7 +270,7 @@ main,
   gap: 6px;
   border: 0;
   background: none;
-  font-size: 11px;
+  font-size: var(--text-small);
   padding: 5px 0;
 }
 .refresh-button:hover {
@@ -270,7 +278,7 @@ main,
 }
 .map-section {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) 292px;
+  grid-template-columns: minmax(0, 1fr) 340px;
   border: 1px solid #d6dcd1;
   background: var(--paper);
   border-radius: 9px;
@@ -303,7 +311,7 @@ main,
   gap: 2px;
 }
 .segmented button {
-  font-size: 11px;
+  font-size: var(--text-small);
   border: 0;
   background: transparent;
   border-radius: 4px;
@@ -336,7 +344,7 @@ main,
   vector-effect: non-scaling-stroke;
 }
 .map-state.tracked {
-  fill: #74927a;
+  fill: var(--map-tracked);
 }
 .map-state.selected {
   fill: var(--peach);
@@ -351,21 +359,48 @@ main,
   stroke: #263f32;
   stroke-width: 2.6;
 }
+.map-state.tracked:hover,
+.map-state.tracked:focus {
+  fill: var(--map-tracked);
+}
+.map-state.selected:focus {
+  fill: var(--peach);
+}
 .map-state.selected:hover {
   fill: #e0b48b;
 }
-.state-label {
-  font-family: "DM Sans", sans-serif;
-  font-weight: 600;
-  font-size: 15px;
-  fill: #fcfcf8;
+.map-canvas {
+  position: relative;
+}
+.map-labels {
+  position: absolute;
+  inset: 0;
   pointer-events: none;
 }
+.state-label {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  padding: 2px 3px;
+  border-radius: 3px;
+  background: var(--map-tracked);
+  line-height: 1;
+  font-family: "DM Sans", sans-serif;
+  font-weight: 600;
+  font-size: var(--text-small);
+  color: #fcfcf8;
+  pointer-events: none;
+}
+.untracked-label {
+  background: #e5e9df;
+  color: var(--muted);
+}
 .selected-label {
-  fill: #65472f;
+  background: var(--peach);
+  color: #65472f;
 }
 .map-bottom {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
   gap: 12px;
@@ -374,7 +409,7 @@ main,
   display: flex;
   gap: 17px;
   flex-wrap: wrap;
-  font-size: 10px;
+  font-size: var(--text-small);
   color: var(--muted);
   align-items: center;
 }
@@ -390,22 +425,22 @@ main,
   display: inline-block;
 }
 .tracked-swatch {
-  background: #74927a;
+  background: var(--map-tracked);
 }
 .selected-swatch {
   background: var(--peach);
 }
 .map-footnote {
-  font-size: 9px;
-  color: #788277;
+  font-size: var(--text-small);
+  color: var(--muted);
 }
 .state-select select {
-  max-width: 146px;
+  max-width: 210px;
   border: 1px solid var(--line);
   border-radius: 4px;
   padding: 6px;
   background: #fcfcf7;
-  font-size: 10px;
+  font-size: var(--text-body);
   color: #4d6053;
 }
 .state-panel {
@@ -422,7 +457,7 @@ main,
   justify-content: space-between;
 }
 .outline-token {
-  font-size: 10px;
+  font-size: var(--text-small);
   border: 1px solid #d1dacb;
   border-radius: 3px;
   padding: 5px;
@@ -434,7 +469,7 @@ main,
   margin-top: 12px;
 }
 .state-office {
-  font-size: 12px;
+  font-size: var(--text-small);
   color: var(--muted);
   margin-top: 5px;
   margin-bottom: 27px;
@@ -446,24 +481,25 @@ main,
   padding: 0;
 }
 .state-panel .poll-values {
-  font-size: 11px;
+  font-size: var(--text-body);
   margin-top: 15px;
 }
 .state-panel .poll-values strong {
-  font-size: 15px;
+  flex-shrink: 0;
+  font-size: var(--text-body);
 }
 .state-panel .market-table {
   margin-top: 27px;
   margin-bottom: 25px;
 }
 .state-panel .market-heading {
-  font-size: 8px;
+  font-size: var(--text-small);
 }
 .state-panel .market-row {
-  font-size: 10px;
+  font-size: var(--text-small);
 }
 .state-panel .poll-meta {
-  font-size: 9px;
+  font-size: var(--text-small);
 }
 .text-link {
   display: flex;
@@ -474,7 +510,7 @@ main,
   border: 0;
   border-top: 1px solid #d8dfd1;
   padding: 16px 0 0;
-  font-size: 11px;
+  font-size: var(--text-small);
   font-weight: 600;
   width: 100%;
   margin-top: auto;
@@ -483,7 +519,7 @@ main,
   color: #477443;
 }
 .empty-state-copy {
-  font-size: 13px;
+  font-size: var(--text-body);
   line-height: 1.8;
   color: var(--muted);
 }
@@ -501,7 +537,7 @@ main,
   margin-top: 8px;
 }
 .section-heading > p {
-  font-size: 12px;
+  font-size: var(--text-small);
   color: var(--muted);
   padding-bottom: 3px;
 }
@@ -536,7 +572,7 @@ main,
   color: #62765f;
 }
 .chamber-context {
-  font-size: 11px;
+  font-size: var(--text-small);
   color: var(--muted);
   margin-top: 9px;
 }
@@ -546,12 +582,12 @@ main,
 .market-heading,
 .market-row {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) 54px 54px 18px;
+  grid-template-columns: var(--market-columns);
   gap: 8px;
   align-items: center;
 }
 .market-heading {
-  font-size: 9px;
+  font-size: var(--text-small);
   color: var(--muted);
   border-bottom: 1px solid var(--line);
   padding-bottom: 10px;
@@ -561,8 +597,8 @@ main,
   text-align: right;
 }
 .market-row {
-  font-size: 12px;
-  min-height: 40px;
+  font-size: var(--text-small);
+  min-height: 46px;
   border-bottom: 1px solid #e9ebe4;
 }
 .market-provider {
@@ -571,10 +607,11 @@ main,
   gap: 8px;
 }
 .provider-icon {
-  width: 18px;
-  height: 18px;
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
   border-radius: 3px;
-  font-size: 11px;
+  font-size: var(--text-small);
   font-weight: 700;
   display: inline-flex;
   justify-content: center;
@@ -593,7 +630,7 @@ main,
   font-variant-numeric: tabular-nums;
 }
 .market-row > .number {
-  font-size: 14px;
+  font-size: var(--text-body);
   font-weight: 600;
 }
 .source-arrow {
@@ -606,7 +643,7 @@ main,
 }
 .market-unavailable {
   grid-column: 2 / 5;
-  font-size: 10px;
+  font-size: var(--text-small);
   color: #886c48;
   text-align: right;
 }
@@ -628,22 +665,23 @@ main,
   padding-top: 21px;
 }
 .mini-heading {
-  font-size: 12px;
+  font-size: var(--text-body);
   font-weight: 600;
   margin-bottom: 15px;
 }
 .poll-top {
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
   gap: 10px;
 }
 .poll-top .eyebrow {
-  font-size: 9px;
-  letter-spacing: 1px;
+  font-size: var(--text-small);
+  letter-spacing: 0.05em;
 }
 .margin {
-  font-size: 10px;
+  font-size: var(--text-small);
   font-weight: 600;
   background: #eef2f6;
   padding: 3px 5px;
@@ -658,7 +696,7 @@ main,
   display: flex;
   flex-direction: column;
   gap: 9px;
-  font-size: 12px;
+  font-size: var(--text-body);
 }
 .poll-values > div {
   display: flex;
@@ -672,6 +710,7 @@ main,
   gap: 7px;
 }
 .poll-values strong {
+  flex-shrink: 0;
   font-size: 18px;
   font-weight: 500;
 }
@@ -697,21 +736,25 @@ main,
 }
 .poll-meta {
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-between;
   gap: 8px;
-  font-size: 10px;
+  font-size: var(--text-small);
   color: var(--muted);
   line-height: 1.6;
 }
 .poll-meta > a {
+  min-width: 0;
+  flex: 1 1 10rem;
+  overflow-wrap: anywhere;
   text-decoration: none;
   display: flex;
   gap: 3px;
   align-items: center;
 }
 .poll-meta > a svg {
-  width: 11px;
-  height: 11px;
+  width: 14px;
+  height: 14px;
   flex-shrink: 0;
 }
 .poll-meta > a:hover {
@@ -724,13 +767,13 @@ main,
   color: #956e37;
 }
 .poll-sample {
-  font-size: 9px;
+  font-size: var(--text-small);
   line-height: 1.7;
   color: var(--muted);
   margin-top: 7px;
 }
 .source-note {
-  font-size: 10px;
+  font-size: var(--text-small);
   color: var(--muted);
   line-height: 1.7;
   margin-top: 12px;
@@ -746,13 +789,13 @@ main,
   padding: 11px 0;
   border-bottom: 1px solid #e9ebe4;
   text-decoration: none;
-  font-size: 12px;
+  font-size: var(--text-small);
 }
 .senate-polls > a:hover {
   color: var(--green);
 }
 .senate-polls > a > span:nth-child(2) {
-  font-size: 10px;
+  font-size: var(--text-small);
 }
 .senate-polls strong {
   text-align: right;
@@ -771,13 +814,13 @@ main,
   border: 1px solid #d8ded2;
   border-radius: 4px;
   font-family: "DM Sans", sans-serif;
-  font-size: 11px;
+  font-size: var(--text-small);
   letter-spacing: 0;
   margin-left: 12px;
   color: var(--muted);
 }
 .watchlist-intro {
-  font-size: 12px;
+  font-size: var(--text-body);
   color: var(--muted);
   margin-top: -8px;
   margin-bottom: 25px;
@@ -813,7 +856,7 @@ main,
   border: 1px solid #dce3d5;
   border-radius: 5px;
   background: #f0f3ea;
-  font-size: 11px;
+  font-size: var(--text-small);
   font-weight: 600;
   color: #5b7350;
 }
@@ -826,24 +869,25 @@ main,
   padding: 25px 24px 0;
 }
 .race-card .poll-values strong {
+  flex-shrink: 0;
   font-size: 17px;
 }
 .race-card .market-table {
   margin: 23px 24px 0;
 }
 .race-card .market-heading {
-  font-size: 8px;
+  font-size: var(--text-small);
 }
 .race-card .market-heading,
 .race-card .market-row {
-  grid-template-columns: minmax(0, 1fr) 43px 43px 13px;
+  grid-template-columns: var(--market-columns);
   gap: 6px;
 }
 .race-card .market-row {
-  font-size: 10px;
+  font-size: var(--text-small);
 }
 .race-card .market-row > .number {
-  font-size: 12px;
+  font-size: var(--text-body);
 }
 .recent-polls {
   border-top: 1px solid #e3e6db;
@@ -854,7 +898,7 @@ main,
   display: flex;
   justify-content: space-between;
   list-style: none;
-  font-size: 10px;
+  font-size: var(--text-small);
   color: var(--muted);
   padding: 15px 24px;
   cursor: pointer;
@@ -863,7 +907,7 @@ main,
   display: none;
 }
 .recent-polls > summary > span {
-  font-size: 15px;
+  font-size: var(--text-body);
   line-height: 1;
 }
 .recent-polls[open] > summary > span {
@@ -873,7 +917,7 @@ main,
   padding: 0 24px 18px;
 }
 .recent-poll {
-  font-size: 10px;
+  font-size: var(--text-small);
   border-top: 1px solid var(--line);
   padding: 12px 0;
   line-height: 1.7;
@@ -887,8 +931,8 @@ main,
   margin: 4px 0;
 }
 .recent-poll small {
-  color: #76806e;
-  font-size: 9px;
+  color: var(--muted);
+  font-size: var(--text-small);
 }
 .methodology {
   display: grid;
@@ -904,7 +948,7 @@ main,
   margin: 11px 0 13px;
 }
 .methodology > div > p {
-  font-size: 13px;
+  font-size: var(--text-body);
   line-height: 1.8;
   color: var(--muted);
   max-width: 275px;
@@ -913,10 +957,12 @@ main,
   border-bottom: 1px solid var(--line);
 }
 .methodology-details summary {
+  gap: 16px;
+  line-height: 1.5;
   display: flex;
   justify-content: space-between;
   list-style: none;
-  font-size: 13px;
+  font-size: var(--text-body);
   font-weight: 500;
   cursor: pointer;
   padding: 17px 0;
@@ -925,6 +971,7 @@ main,
   display: none;
 }
 .methodology-details summary > span {
+  flex-shrink: 0;
   font-size: 18px;
   color: var(--muted);
 }
@@ -932,7 +979,7 @@ main,
   transform: rotate(45deg);
 }
 .methodology-details details p {
-  font-size: 12px;
+  font-size: var(--text-body);
   line-height: 1.9;
   color: var(--muted);
   padding-bottom: 15px;
@@ -948,7 +995,7 @@ main,
   align-items: center;
   gap: 20px;
   min-height: 98px;
-  font-size: 11px;
+  font-size: var(--text-small);
   color: var(--muted);
 }
 .site-footer .wordmark {
@@ -966,11 +1013,11 @@ main,
   width: 12px;
 }
 .back-top {
-  font-size: 10px;
+  font-size: var(--text-small);
   text-decoration: none;
 }
 .poll-empty p {
-  font-size: 12px;
+  font-size: var(--text-small);
   color: var(--muted);
   line-height: 1.7;
   margin-top: 16px;
@@ -983,7 +1030,7 @@ main,
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 12px;
+  font-size: var(--text-small);
   line-height: 1.8;
   color: var(--muted);
   padding: 24px;
@@ -995,7 +1042,7 @@ main,
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 12px;
+  font-size: var(--text-small);
   color: var(--muted);
 }
 .muted {
@@ -1003,7 +1050,7 @@ main,
 }
 .error-banner {
   padding: 15px 18px;
-  font-size: 12px;
+  font-size: var(--text-small);
   line-height: 1.7;
   border: 1px solid #e0cfb7;
   border-radius: 5px;
@@ -1046,7 +1093,7 @@ main,
     font-size: 74px;
   }
   .map-section {
-    grid-template-columns: minmax(0, 1fr) 320px;
+    grid-template-columns: minmax(0, 1fr) 340px;
   }
   .map-wrap {
     max-width: 820px;
@@ -1080,7 +1127,7 @@ main,
     font-size: 56px;
   }
   .map-section {
-    grid-template-columns: minmax(0, 1fr) 260px;
+    grid-template-columns: minmax(0, 1fr) 320px;
   }
   .map-main {
     padding: 23px 20px 18px;
@@ -1107,6 +1154,7 @@ main,
     padding: 25px 20px;
   }
   .race-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 14px;
   }
   .race-card-header {
@@ -1126,15 +1174,15 @@ main,
     padding-right: 18px;
   }
   .race-card .poll-values {
-    font-size: 11px;
+    font-size: var(--text-body);
   }
   .race-card .market-heading,
   .race-card .market-row {
-    grid-template-columns: minmax(0, 1fr) 36px 36px 12px;
+    grid-template-columns: var(--market-columns);
     gap: 4px;
   }
   .race-card .market-heading {
-    font-size: 7px;
+    font-size: var(--text-small);
   }
   .race-card .market-provider {
     gap: 4px;
@@ -1144,14 +1192,14 @@ main,
   }
   .state-panel .market-heading,
   .state-panel .market-row {
-    grid-template-columns: minmax(0, 1fr) 37px 37px 12px;
+    grid-template-columns: var(--market-columns);
     gap: 5px;
   }
   .state-panel .market-row > .number {
-    font-size: 12px;
+    font-size: var(--text-body);
   }
 }
-@media (max-width: 820px) {
+@media (max-width: 1000px) {
   .site-header,
   main,
   .site-footer {
@@ -1163,7 +1211,7 @@ main,
   }
   .site-header nav {
     gap: 20px;
-    font-size: 11px;
+    font-size: var(--text-small);
   }
   .site-header .wordmark {
     font-size: 18px;
@@ -1177,7 +1225,7 @@ main,
     letter-spacing: -2.5px;
   }
   .hero p {
-    font-size: 13px;
+    font-size: var(--text-body);
   }
   .election-date {
     min-width: 150px;
@@ -1188,19 +1236,19 @@ main,
     gap: 10px;
   }
   .election-date > div span {
-    font-size: 13px;
+    font-size: var(--text-small);
   }
   .election-date p {
-    font-size: 10px;
+    font-size: var(--text-small);
   }
   .hero-kicker {
     gap: 10px;
   }
   .hero-kicker .eyebrow {
-    font-size: 8px;
+    font-size: var(--text-small);
   }
   .edition {
-    font-size: 8px;
+    font-size: var(--text-small);
   }
   .map-section {
     grid-template-columns: 1fr;
@@ -1287,11 +1335,11 @@ main,
   }
   .race-card .market-heading,
   .race-card .market-row {
-    grid-template-columns: minmax(0, 1fr) 43px 43px 13px;
+    grid-template-columns: var(--market-columns);
     gap: 6px;
   }
   .race-card .market-heading {
-    font-size: 8px;
+    font-size: var(--text-small);
   }
   .methodology {
     grid-template-columns: 1fr 1.5fr;
@@ -1303,10 +1351,10 @@ main,
     gap: 15px;
   }
   .site-footer p {
-    font-size: 10px;
+    font-size: var(--text-small);
   }
 }
-@media (max-width: 580px) {
+@media (max-width: 700px) {
   .site-header,
   main,
   .site-footer {
@@ -1314,7 +1362,11 @@ main,
     margin-right: 18px;
   }
   .site-header {
-    height: 70px;
+    height: auto;
+    min-height: 70px;
+    flex-wrap: wrap;
+    gap: 12px;
+    padding-block: 16px;
   }
   .site-header nav {
     gap: 16px;
@@ -1348,7 +1400,7 @@ main,
     letter-spacing: -2px;
   }
   .hero p {
-    font-size: 12px;
+    font-size: var(--text-body);
     max-width: 310px;
     line-height: 1.8;
   }
@@ -1356,7 +1408,7 @@ main,
     display: none;
   }
   .hero-kicker .eyebrow {
-    font-size: 8px;
+    font-size: var(--text-small);
     letter-spacing: 1.15px;
   }
   .edition {
@@ -1364,6 +1416,7 @@ main,
   }
   .election-date {
     display: flex;
+    flex-wrap: wrap;
     align-items: center;
     gap: 12px;
     min-width: 0;
@@ -1373,7 +1426,8 @@ main,
     margin-top: 21px;
   }
   .election-date .eyebrow {
-    font-size: 8px;
+    flex-basis: 100%;
+    font-size: var(--text-small);
   }
   .election-date > div {
     font-size: 26px;
@@ -1383,17 +1437,17 @@ main,
     margin: 0;
   }
   .election-date > div span {
-    font-size: 8px;
+    font-size: var(--text-small);
     line-height: 1.4;
     letter-spacing: 0.5px;
   }
   .election-date p {
-    font-size: 10px;
+    font-size: var(--text-small);
     margin-left: auto;
   }
   .desk-status {
     align-items: flex-start;
-    font-size: 9px;
+    font-size: var(--text-small);
     gap: 8px;
   }
   .desk-status > span {
@@ -1407,7 +1461,7 @@ main,
     display: none;
   }
   .refresh-button {
-    font-size: 9px;
+    font-size: var(--text-small);
     white-space: nowrap;
     padding-top: 0;
   }
@@ -1427,10 +1481,10 @@ main,
     font-size: 20px;
   }
   .map-toolbar .eyebrow {
-    font-size: 8px;
+    font-size: var(--text-small);
   }
   .segmented button {
-    font-size: 10px;
+    font-size: var(--text-small);
     padding: 7px 11px;
   }
   .map-toolbar .segmented {
@@ -1445,16 +1499,16 @@ main,
     align-items: flex-start;
   }
   .map-legend {
-    font-size: 8px;
+    font-size: var(--text-small);
     gap: 8px 12px;
   }
   .map-footnote {
     width: 100%;
-    font-size: 8px;
+    font-size: var(--text-small);
   }
   .state-select select {
-    width: 110px;
-    font-size: 9px;
+    width: auto;
+    font-size: var(--text-body);
   }
   .state-panel {
     padding: 20px;
@@ -1479,26 +1533,27 @@ main,
   }
   .state-panel .market-heading,
   .state-panel .market-row {
-    grid-template-columns: minmax(0, 1fr) 54px 54px 18px;
+    grid-template-columns: var(--market-columns);
     gap: 8px;
   }
   .state-panel .market-row > .number {
-    font-size: 14px;
+    font-size: var(--text-body);
   }
   .state-panel .poll-values {
-    font-size: 12px;
+    font-size: var(--text-body);
   }
   .state-panel .poll-values strong {
+    flex-shrink: 0;
     font-size: 18px;
   }
   .state-panel .poll-meta {
-    font-size: 10px;
+    font-size: var(--text-small);
   }
   .state-panel .market-heading {
-    font-size: 9px;
+    font-size: var(--text-small);
   }
   .state-panel .market-row {
-    font-size: 12px;
+    font-size: var(--text-small);
   }
   .congress-section,
   .watchlist-section {
@@ -1509,7 +1564,7 @@ main,
     align-items: flex-start;
   }
   .section-heading .eyebrow {
-    font-size: 8px;
+    font-size: var(--text-small);
   }
   .section-heading h2 {
     font-size: 24px;
@@ -1530,7 +1585,7 @@ main,
     gap: 18px;
   }
   .watchlist-intro {
-    font-size: 11px;
+    font-size: var(--text-body);
     line-height: 1.7;
     margin-top: -4px;
   }
@@ -1539,21 +1594,21 @@ main,
     gap: 16px;
   }
   .race-card .market-heading {
-    font-size: 9px;
+    font-size: var(--text-small);
   }
   .race-card .market-row {
-    font-size: 12px;
+    font-size: var(--text-small);
   }
   .race-card .market-row > .number {
-    font-size: 14px;
+    font-size: var(--text-body);
   }
   .race-card .market-heading,
   .race-card .market-row {
-    grid-template-columns: minmax(0, 1fr) 54px 54px 18px;
+    grid-template-columns: var(--market-columns);
     gap: 8px;
   }
   .race-card .poll-values {
-    font-size: 12px;
+    font-size: var(--text-body);
   }
   .methodology {
     grid-template-columns: 1fr;
@@ -1566,10 +1621,10 @@ main,
   }
   .methodology > div > p {
     max-width: 100%;
-    font-size: 12px;
+    font-size: var(--text-body);
   }
   .methodology-details summary {
-    font-size: 12px;
+    font-size: var(--text-body);
   }
   .site-footer {
     position: relative;
@@ -1577,14 +1632,14 @@ main,
   .site-footer p {
     order: 3;
     flex-basis: 100%;
-    font-size: 10px;
+    font-size: var(--text-small);
     line-height: 1.8;
   }
   .back-top {
     margin-left: auto;
   }
   .source-note {
-    font-size: 10px;
+    font-size: var(--text-small);
   }
   .map-placeholder {
     min-height: 200px;

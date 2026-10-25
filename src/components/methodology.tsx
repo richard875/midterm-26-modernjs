@@ -15,7 +15,7 @@ export default function Methodology() {
         <p>Keep the public’s vote intentions and the market’s expectations in context.</p>
       </div>
       <div className="methodology-details">
-        <details open>
+        <details name="methodology" open>
           <summary>
             What do the polls measure?<span>+</span>
           </summary>
@@ -45,7 +45,7 @@ export default function Methodology() {
             = registered voters; A = adults. Polls older than 14 days are flagged.
           </p>
         </details>
-        <details>
+        <details name="methodology">
           <summary>
             What do the markets measure?<span>+</span>
           </summary>
@@ -61,7 +61,7 @@ export default function Methodology() {
             books and unavailable sources show no quote. No market price is a polling average.
           </p>
         </details>
-        <details>
+        <details name="methodology">
           <summary>
             How is the watchlist selected?<span>+</span>
           </summary>
@@ -78,7 +78,7 @@ export default function Methodology() {
             These are pre-election polls and markets, not election returns.
           </p>
         </details>
-        <details>
+        <details name="methodology">
           <summary>
             Free APIs & source documentation<span>+</span>
           </summary>
