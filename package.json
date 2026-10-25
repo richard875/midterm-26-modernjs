@@ -8,10 +8,9 @@
   },
   "scripts": {
     "dev": "modern dev",
-    "build": "modern build",
+    "build": "modern build && node scripts/package-pages.mjs",
     "serve": "modern serve",
-    "build:pages": "npm run build && node scripts/package-pages.mjs",
-    "preview:pages": "wrangler pages dev dist/pages --port 8788",
+    "preview": "wrangler dev --port 8788",
     "typecheck": "tsc --noEmit",
     "lint": "biome check .",
     "format": "biome check --write .",

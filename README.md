@@ -17,20 +17,19 @@ Open **http://localhost:8080**. No API keys or environment variables are needed.
 
 ```sh
 npm run check          # strict TypeScript + Biome + deterministic provider tests
-npm run build          # Modern.js production build
+npm run build          # Modern.js production build + Cloudflare static asset packaging
 npm run serve          # Modern.js Node production server
-npm run build:pages    # production build + static Pages packaging
-npm run preview:pages  # http://localhost:8788, with real Cloudflare Pages Functions
+npm run preview        # http://localhost:8788, the Cloudflare Worker + assets in workerd
 ```
 
-The Pages preview requires a successful `build:pages` first. No Cloudflare login is needed for the local preview. It uses live external APIs; a provider outage is shown per source, without mock fallback.
+The Cloudflare preview requires a successful `build` first. No Cloudflare login is needed for the local preview. It uses live external APIs; a provider outage is shown per source, without mock fallback.
 
 ## What is here
 
 - File-based Modern.js routing (`src/routes`) and separate compile/runtime configs.
 - React + strict TypeScript, Zod at external boundaries, a lazy-loaded SVG map, and a small cancellable fetch hook.
 - Two native BFF endpoints: `GET /api/overview` and `GET /api/races`.
-- Portable provider/services code shared with two Cloudflare Pages Functions.
+- Portable provider/services code shared with a small Cloudflare Worker.
 - Nine curated races: Texas, Maine, Michigan, Kansas and Iowa Senate; Georgia, Wisconsin, Nevada and Ohio governor.
 - Accessible map controls and state selector, race filters, refresh, individual poll history, source links, polling-age labels, and partial-error states.
 
@@ -44,11 +43,11 @@ A poll's fieldwork date is different from the time we retrieve it. VoteHub's lat
 
 See [sources, licences and methodology](docs/data-sources.md) for exact endpoints and market mappings. Polls and market-implied probability answer different questions; neither is presented as an election result. Map colors indicate watchlist coverage, not projected winners.
 
-## Cloudflare Pages
+## Cloudflare Workers
 
-**There is one deployment adaptation:** Modern.js documents a Node server rather than a native Pages runtime. This repo deploys its CSR frontend as static assets, with `functions/api` providing the same small APIs at the edge. No Modern.js Node server is bundled into Pages.
+**There is one deployment adaptation:** Modern.js documents a Node server rather than a native Workers runtime. This repo deploys its CSR frontend as Workers static assets, with `worker/index.ts` providing the same small APIs at the edge. No Modern.js Node server is bundled into the Worker.
 
-Build command: `npm run build:pages`. Output directory: `dist/pages`. Keep the repository root as the project root so Pages discovers `functions/`. Full instructions: [Cloudflare deployment](docs/cloudflare-pages.md).
+Build command: `npm run build`. Deploy command: `npx wrangler deploy`. Keep the repository root as the project root so Wrangler finds `wrangler.jsonc`. Full instructions: [Cloudflare deployment](docs/cloudflare.md).
 
 This task initializes local Git and creates local commits. It does not create a remote repository or deploy anything.
 

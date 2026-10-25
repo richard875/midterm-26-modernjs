@@ -16,7 +16,7 @@
     "shared",
     "server",
     "api",
-    "functions",
+    "worker",
     "tests",
     "modern.config.ts",
     "vitest.config.ts"
