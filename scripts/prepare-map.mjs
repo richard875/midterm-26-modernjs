@@ -72,7 +72,9 @@ const states = feature(atlas, atlas.objects.states)
     name: s.properties.name,
     code: abbreviations[s.properties.name],
     path: path(s),
-    center: (labelCenters[s.properties.name] ?? path.centroid(s)).map((n) => Math.round(n * 10) / 10),
+    center: (labelCenters[s.properties.name] ?? path.centroid(s)).map(
+      (n) => Math.round(n * 10) / 10,
+    ),
   }));
 await writeFile(
   new URL('../src/features/map/states.json', import.meta.url),
