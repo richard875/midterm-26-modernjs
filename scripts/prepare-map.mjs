@@ -64,7 +64,7 @@ const abbreviations = {
   Wyoming: 'WY',
 };
 // Anchor Michigan's label inside the Lower Peninsula, rather than between peninsulas.
-const labelCenters = { Michigan: [686, 190] };
+const labelCenters = { Michigan: [686, 196] };
 const path = geoPath().digits(1);
 const states = feature(atlas, atlas.objects.states)
   .features.filter((s) => abbreviations[s.properties.name])
