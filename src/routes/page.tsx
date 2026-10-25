@@ -199,7 +199,8 @@ export default function Page() {
             <div>
               <span className="eyebrow">03 / Beyond Washington</span>
               <h2 id="watchlist-heading">
-                States to watch<span className="count-badge">06</span>
+                States to watch
+                <span className="count-badge">{String(RACES.length).padStart(2, '0')}</span>
               </h2>
             </div>
             <fieldset className="segmented" aria-label="Filter state races">

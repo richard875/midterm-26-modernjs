@@ -34,3 +34,14 @@ The map is implemented with keyboard handlers (Enter/Space), named pressed-state
 Fresh native development startup was checked again after the final HTML template change: HTML 200 and valid live overview data. The framework's automatic restart after a compile-config edit failed on ESM module resolution; manual restart works and is documented in the README.
 
 No cloud deployment, remote repository, account login or external publication was performed.
+
+## Watchlist expansion — 25 October 2026
+
+Added Kansas Senate, Iowa Senate and Ohio Governor, for nine races (five Senate and four governor). The initial results above remain a record of the original six-race version.
+
+- `npm run check` passes with nine tests across two files. The additional integration test checks captured public response shapes for the three new mappings and excludes primary/Ohio Senate rows from governor coverage.
+- `npm run build:pages` passes. A live `/api/races` request through Wrangler/workerd returned all nine entries; polls and both market sources were successful for each addition.
+- Browser checks confirm the `09` badge, the five-card Senate filter and four-card Governor filter. KS and IA are highlighted in Senate map mode; OH is highlighted in Governor mode. Enter-key Kansas selection and the native state selector for Iowa/Ohio update the correct poll and market details.
+- Current counts and methodology state lists derive from the race configuration.
+
+[Expanded watchlist screenshot](screenshots/watchlist-expansion.png) shows the three additions with live data.

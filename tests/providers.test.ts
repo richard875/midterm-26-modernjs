@@ -159,7 +159,7 @@ describe('partial data and contracts', () => {
     expect(result.genericBallot.status).toBe('ok');
     expect(result.senate.kalshi.status).toBe('empty');
   });
-  it('makes only two bulk polling requests for six races and surfaces complete outages', async () => {
+  it('keeps two bulk polling requests as the watchlist grows and surfaces complete outages', async () => {
     const calls: string[] = [];
     const fetcher: typeof fetch = async (input) => {
       calls.push(String(input));
@@ -167,8 +167,8 @@ describe('partial data and contracts', () => {
     };
     const result = racesResponseSchema.parse(await getRaces(fetcher));
     expect(calls.filter((url) => url.includes('pollingforecast'))).toHaveLength(2);
-    expect(calls).toHaveLength(14);
-    expect(result.races).toHaveLength(6);
+    expect(calls).toHaveLength(2 + RACES.length * 2);
+    expect(result.races).toHaveLength(RACES.length);
     expect(
       result.races.every(
         (r) => r.polls.status === 'error' && r.markets.polymarket.status === 'error',

@@ -1,4 +1,8 @@
+import { RACES } from '../../shared/races';
+
 export default function Methodology() {
+  const senateRaces = RACES.filter((race) => race.office === 'Senate');
+  const governorRaces = RACES.filter((race) => race.office === 'Governor');
   return (
     <section className="methodology" id="methodology" aria-labelledby="methodology-heading">
       <div>
@@ -62,10 +66,11 @@ export default function Methodology() {
             How is the watchlist selected?<span>+</span>
           </summary>
           <p>
-            Six curated races keep this Modern.js demo small: three Senate races (TX, ME, MI) and
-            three governor races (GA, WI, NV). This is an editorial learning scope, not an
-            exhaustive competitiveness ranking. Highlighted states indicate coverage; the map does
-            not predict winners.
+            This Modern.js demo follows {RACES.length} curated races: {senateRaces.length} Senate
+            races ({senateRaces.map((race) => race.state).join(', ')}) and {governorRaces.length}{' '}
+            governor races ({governorRaces.map((race) => race.state).join(', ')}). This is an
+            editorial learning scope, not an exhaustive competitiveness ranking. Highlighted states
+            indicate coverage; the map does not predict winners.
           </p>
           <p>
             Data is fetched on page load and when you select Refresh data. There is no background

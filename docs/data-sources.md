@@ -7,8 +7,8 @@ All polling is obtained from public, free JSON APIs. All betting-market data is 
 | Provider         | Endpoint                                                              | Used for                                                      |
 | ---------------- | --------------------------------------------------------------------- | ------------------------------------------------------------- |
 | VoteHub          | `https://api.votehub.com/polls?poll_type=generic-ballot&subject=2026` | Latest House generic ballot and up to eight distinct releases |
-| Polling Forecast | `https://www.pollingforecast.com/api/us/polls?kind=Senate`            | TX, ME, MI general-election candidate polls                   |
-| Polling Forecast | `https://www.pollingforecast.com/api/us/polls?kind=Governor`          | `G-GA`, `G-WI`, `G-NV` candidate polls                        |
+| Polling Forecast | `https://www.pollingforecast.com/api/us/polls?kind=Senate`            | TX, ME, MI, KS, IA general-election candidate polls           |
+| Polling Forecast | `https://www.pollingforecast.com/api/us/polls?kind=Governor`          | `G-GA`, `G-WI`, `G-NV`, `G-OH` candidate polls                |
 
 These endpoints were tested through both the Modern.js BFF and Cloudflare's local workerd runtime on 25 October 2026. Free access is the provider's current policy, not a guarantee of future uptime or coverage. [VoteHub docs](https://votehub.com/polls/api/), [Polling Forecast docs](https://www.pollingforecast.com/us/data).
 
@@ -32,9 +32,12 @@ Kalshi: `https://api.elections.kalshi.com/trade-api/v2/markets?event_ticker={eve
 | TX Senate      | `texas-senate-election-winner`            | 630963 / 630964  | `SENATETX-26`   |
 | ME Senate      | `maine-senate-election-winner`            | 630772 / 630773  | `SENATEME-26`   |
 | MI Senate      | `michigan-senate-election-winner`         | 630805 / 630806  | `SENATEMI-26`   |
+| KS Senate      | `kansas-senate-election-winner`           | 630746 / 630747  | `SENATEKS-26`   |
+| IA Senate      | `iowa-senate-election-winner`             | 630733 / 630734  | `SENATEIA-26`   |
 | GA Governor    | `georgia-governor-winner-2026`            | 629337 / 629338  | `GOVPARTYGA-26` |
 | WI Governor    | `wisconsin-governor-winner-2026`          | 629720 / 629721  | `GOVPARTYWI-26` |
 | NV Governor    | `nevada-governor-winner-2026`             | 629505 / 629506  | `GOVPARTYNV-26` |
+| OH Governor    | `ohio-governor-winner-2026`               | 629557 / 629558  | `GOVPARTYOH-26` |
 
 Kalshi party market tickers append `-D` / `-R`. Every identity was checked directly; no runtime fuzzy discovery is performed. The candidacies in `shared/races.ts` were verified from those markets and matching poll rows. Review this configuration when the cycle changes.
 

@@ -1,6 +1,6 @@
 # Midterm / 26
 
-A small, frontend-focused **Modern.js 3** learning project: an interactive US map, House/Senate control markets, and six Senate/governor races. Election day is **Tuesday, 3 November 2026**.
+A small, frontend-focused **Modern.js 3** learning project: an interactive US map, House/Senate control markets, and nine Senate/governor races. Election day is **Tuesday, 3 November 2026**.
 
 Built for an experienced React/Next.js developer. Start with the running app, then read [the 30-minute code tour](docs/modernjs-walkthrough.md). The original plan and implementation ledger are in [plan/](plan/00-project-plan.md).
 
@@ -31,7 +31,7 @@ The Pages preview requires a successful `build:pages` first. No Cloudflare login
 - React + strict TypeScript, Zod at external boundaries, a lazy-loaded SVG map, and a small cancellable fetch hook.
 - Two native BFF endpoints: `GET /api/overview` and `GET /api/races`.
 - Portable provider/services code shared with two Cloudflare Pages Functions.
-- Six curated races: Texas, Maine and Michigan Senate; Georgia, Wisconsin and Nevada governor.
+- Nine curated races: Texas, Maine, Michigan, Kansas and Iowa Senate; Georgia, Wisconsin, Nevada and Ohio governor.
 - Accessible map controls and state selector, race filters, refresh, individual poll history, source links, polling-age labels, and partial-error states.
 
 ## Data
@@ -40,7 +40,7 @@ Polling comes from **[VoteHub](https://votehub.com/polls/api/)** (House generic 
 
 Betting-market data comes directly from **[Polymarket](https://docs.polymarket.com/market-data/discover-markets)** and **[Kalshi](https://docs.kalshi.com/getting_started/quick_start_market_data)** only. Polymarket shows its Yes outcome prices; Kalshi shows current bid/ask midpoints. Independent party prices are not normalized. There is no trading functionality.
 
-A poll's fieldwork date is different from the time we retrieve it. VoteHub's latest generic-ballot record was 4 October during verification; Wisconsin's latest matching poll was 9 October. The UI flags polls over 14 days old. A national Senate polling average would be misleading, so that panel shows the three watched state polls.
+A poll's fieldwork date is different from the time we retrieve it. VoteHub's latest generic-ballot record was 4 October during verification; Wisconsin's latest matching poll was 9 October. The UI flags polls over 14 days old. A national Senate polling average would be misleading, so that panel shows the five watched state polls.
 
 See [sources, licences and methodology](docs/data-sources.md) for exact endpoints and market mappings. Polls and market-implied probability answer different questions; neither is presented as an election result. Map colors indicate watchlist coverage, not projected winners.
 

@@ -133,7 +133,8 @@ export default function MapSection({
               Outside this {office === 'All races' ? '' : `${office.toLowerCase()} `}watchlist
             </p>
             <p className="empty-state-copy">
-              This learning project follows six selected races. Choose a highlighted state
+              This learning project follows {RACES.length} selected races. Choose a highlighted
+              state
               {office !== 'All races' ? ' or switch to All races' : ''} to explore its polls and
               markets.
             </p>

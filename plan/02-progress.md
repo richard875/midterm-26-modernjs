@@ -56,3 +56,11 @@
 All six planned implementation phases are complete. The only material compatibility addition is the documented Modern.js 3.10.3 ESM path workaround required by this folder's spaces. Local-only development and verification remain the authorized scope; deployment is documented for the user's later use.
 
 Final handoff check: a fresh `npm run dev` serves HTML 200 and the native API successfully. During configuration editing, Modern.js's automatic restart hit an upstream ESM `./plugins/analyze` resolution error; the README explicitly instructs manual restart after compile-config edits. Ordinary component/style HMR and fresh startup work. This is a documented framework limitation, not a reason to add another vendor patch.
+
+## Follow-up — Kansas, Iowa and Ohio watchlist expansion
+
+- User requested Kansas Senate, Iowa Senate and Ohio Governor after authorizing the public GitHub repository and initial push. Recorded the follow-up plan in `03-watchlist-expansion.md` before implementation.
+- Verified exact candidates, poll keys, Polymarket market IDs and Kalshi event tickers against live APIs. Added three configuration entries; existing shared services, state map, chamber list and cards consume them automatically.
+- Replaced fixed watchlist count/methodology copy with configuration-derived totals and office lists. Coverage is now nine races: five Senate and four governor.
+- Updated the current README and data-source documentation. Historical initial verification records remain unchanged.
+- Strict TypeScript, lint, all nine tests and Pages build pass. Live workerd checks return polling plus both exchange feeds for all three additions. Browser checks cover map selection, Senate/Governor separation and five/four filter results. Verification screenshot: `docs/screenshots/watchlist-expansion.png`.
