@@ -24,6 +24,17 @@ Open `http://localhost:8788`, then test both `/api/overview` and `/api/races`. T
 
 `wrangler.jsonc` supplies the Pages name, `dist/pages` output directory and runtime compatibility date. There are no Node compatibility flags, secrets, KV, D1, R2 or service bindings.
 
+## Dependency installation failures
+
+If Cloudflare's npm 10 install reports `Missing: zod@3.25.76 from lock file`, regenerate and verify the lockfile with the builder's npm version, then commit `package-lock.json`:
+
+```sh
+npx --yes npm@10.9.2 install --package-lock-only --ignore-scripts
+npx --yes npm@10.9.2 ci
+```
+
+Modern.js's BFF package declares an optional Zod 3 peer alongside this app's Zod 4 dependency. The lockfile must include the nested Zod 3 entry for npm 10's clean install. The separate `react-side-effect` React peer warning does not stop installation.
+
 ## Deploy later from the terminal
 
 Run commands **from the repository root** so Wrangler can discover `functions/` and the config. Use an npm installation with devDependencies available during the build; Modern.js, the BFF plugin and Wrangler are build tools.
