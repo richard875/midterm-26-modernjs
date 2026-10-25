@@ -80,3 +80,7 @@ Final handoff check: a fresh `npm run dev` serves HTML 200 and the native API su
 - Added separate House building and Senate gavel icons; renamed the chamber headings to “House of Representatives” and “Senate”, and removed the “US” prefix in the selected-state Senate label.
 - Replaced the methodology's instant native disclosure with an exclusive React-controlled accordion and 240ms CSS grid/opacity transitions. Buttons retain keyboard behavior, ARIA relationships and focus exclusion for closed panels. Reduced-motion preferences disable the transitions.
 - As requested, kept checks brief: formatting, TypeScript and lint only, with no polling investigation or extended browser run.
+
+## Follow-up — Michigan label position (26 October)
+
+Moved the MI label to a Lower Peninsula anchor at map coordinates (686, 184). The override lives in the map generator so regeneration preserves the placement. Regenerated the map data and checked formatting; no extended testing was needed for this label-only change.
